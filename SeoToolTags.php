@@ -7,6 +7,8 @@ use Statamic\API\Parse;
 use Statamic\Extend\Tags;
 
 use Statamic\API\URL;
+use Statamic\API\Data;
+use Statamic\Contracts\Data\Data as DataContract;
 
 class SeoToolTags extends Tags
 {
@@ -26,13 +28,23 @@ class SeoToolTags extends Tags
     }
 
     private function buildMetaTags() {
+        $page_data = array_get($this->context, "page_object");
+
+        if (!$page_data instanceof DataContract) {
+            $this->model = Data::find($page_data["id"]);
+        } else {
+            $this->model = $page_data;
+        }
+
+        
         $data = array();
 
         $data["title"] = $this->getConfig("title");
         $data["home_url"] = URL::makeAbsolute('/');
         $data["description"] = $this->getConfig("description");
         $data["locale"] = $this->getConfig("locale", "de_DE");
-        $data["image"] = $this->getConfig("image");
+        $data["image"] = $this->model->get("og_image") ? $this->model->get("og_image") : $this->getConfig("image");
+        
         //$data["canonical_url"] = $this->model->absoluteUrl();
 
         return $data;

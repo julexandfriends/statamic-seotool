@@ -1,0 +1,17 @@
+<title>{{ title }}</title>
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{{ title }}" />
+
+<meta property="og:description" content="{{ description }}" />
+<!--meta property="og:url" content="{{ canonical_url }}" /-->
+<!--meta property="og:site_name" content="{{ site_name }}" /-->
+<meta property="og:locale" content="{{ locale }}" />
+
+<link href="{{ home_url }}" rel="home" />
+<!--link href="{{ canonical_url }}" rel="canonical" /-->
+
+{{ glide:generate src="{image}" width="1200" height="1200" fit="crop" absolute="true" }}
+    <meta property="og:image" content="{{ url }}" />
+    <meta property="og:image:width" content="{{ width }}" />
+    <meta property="og:image:height" content="{{ height }}" />
+{{ /glide:generate }}

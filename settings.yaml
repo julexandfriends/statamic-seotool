@@ -1,0 +1,11 @@
+fields:
+  title:
+    type: text
+  description:
+    type: textarea
+  locale:
+    type: text
+  image:
+    type: assets
+    container: main
+    max_files: 1
